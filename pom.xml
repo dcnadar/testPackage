@@ -9,7 +9,7 @@
         <relativePath />
         <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.monkphasedevs</groupId>
+    <groupId>dcnadar</groupId>
     <artifactId>testPackage-api</artifactId>
     <version>0.0.5</version>
     <name>testPackage-common</name>
