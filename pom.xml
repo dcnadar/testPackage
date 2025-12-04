@@ -9,7 +9,7 @@
         <relativePath />
         <!-- lookup parent from repository -->
     </parent>
-    <groupId>dcnadar</groupId>
+    <groupId>com.git.dcnadar</groupId>
     <artifactId>testPackage-api</artifactId>
     <version>0.0.5</version>
     <name>testPackage-common</name>
