@@ -12,5 +12,6 @@ import lombok.Setter;
 public class DashboardRow implements Serializable{
 
 	private String rowLabel;
+	
 	private List<DashboardPage> page;
 }
