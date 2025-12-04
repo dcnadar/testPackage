@@ -10,9 +10,9 @@
         <!-- lookup parent from repository -->
     </parent>
     <groupId>com.monkphasedev</groupId>
-    <artifactId>testPackage-api-common-lib</artifactId>
+    <artifactId>testPackage</artifactId>
     <version>0.0.1</version>
-    <name>testPackage-api-common-lib</name>
+    <name>testPackage</name>
     <packaging>jar</packaging>
     <description>Project for crm api commons</description>
 
