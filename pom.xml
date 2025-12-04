@@ -11,7 +11,7 @@
     </parent>
     <groupId>com.git.dcnadar</groupId>
     <artifactId>testPackage-api</artifactId>
-    <version>0.0.5</version>
+    <version>0.0.7</version>
     <name>testPackage-common</name>
     <packaging>jar</packaging>
     <description>Project for crm api commons</description>
