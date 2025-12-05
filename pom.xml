@@ -9,10 +9,10 @@
         <relativePath />
         <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.git.dcnadar</groupId>
-    <artifactId>testPackage-api</artifactId>
-    <version>0.0.7</version>
-    <name>testPackage-common</name>
+    <groupId>io.github.dcnadar</groupId>
+    <artifactId>testpackage-api</artifactId>
+    <version>0.0.8</version>
+    <name>testpackage-common</name>
     <packaging>jar</packaging>
     <description>Project for crm api commons</description>
 
