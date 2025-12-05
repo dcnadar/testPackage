@@ -1,36 +1,36 @@
-name: Deploy Maven Package on Release
+name: Deploy Maven Package on Release or Tag
 
 on:
   release:
-    types: [created]  # Trigger when a new release is created
+    types: [created]
+  push:
+    tags:
+      - "v*"
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # STEP 1: Checkout
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }} # needed for pushing changes
 
-      # STEP 2: Extract version from tag (example: v0.4.0 -> 0.4.0)
       - name: Extract version from tag
         id: vars
         run: |
           RAW="${GITHUB_REF_NAME}"
-          VERSION="${RAW#v}"     # remove "v" prefix
+          VERSION="${RAW#v}"
           echo "version=$VERSION" >> $GITHUB_OUTPUT
-        # Output -> steps.vars.outputs.version
 
-      # STEP 3: Setup Java / Maven
       - name: Setup JDK 21
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 21
 
-      # STEP 4: Configure Maven settings.xml
-      - name: Create settings.xml
+      - name: Create settings.xml for GitHub Packages
         run: |
           mkdir -p ~/.m2
           cat > ~/.m2/settings.xml <<EOF
@@ -45,10 +45,17 @@ jobs:
           </settings>
           EOF
 
-      # STEP 5: Update POM VERSION to match TAG VERSION
-      - name: Update version in pom.xml
+      - name: Update POM version inside repo
         run: mvn versions:set -DnewVersion=${{ steps.vars.outputs.version }} -DgenerateBackupPoms=false
 
-      # STEP 6: Deploy to GitHub Packages
-      - name: Deploy package
+      # NEW STEP — Commit POM version back to GitHub
+      - name: Commit updated POM version
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add pom.xml
+          git commit -m "Update version to ${{ steps.vars.outputs.version }}" || echo "No changes to commit"
+          git push
+
+      - name: Deploy package to GitHub Packages
         run: mvn deploy -DskipTests
